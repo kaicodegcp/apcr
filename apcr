@@ -1,0 +1,24 @@
+Hi Team,
+
+We would like your assistance in reviewing an S3 access issue encountered during our integration testing.
+
+Based on our testing, we observed the following:
+
+* When a wildcard value is used in the S3 bucket policy condition, the access works successfully.
+* When the complete organization path is specified instead of the wildcard, the same request fails.
+* The configuration and access pattern work in the SVC environment, but we are seeing different behavior in the Integration environment.
+* We have reviewed the relevant Databricks, IAM, and S3 configurations, but the reason for this difference is still unclear.
+
+We will attach the relevant policy details, screenshots, test results, and the comparison between the SVC and Integration environments for your reference.
+
+Could you please help us understand:
+
+1. Why does the access work with the wildcard but fail when the complete organization path is specified?
+2. Is the full organization path being evaluated differently in the Integration environment?
+3. Are there any additional S3, AWS Organizations, VPC endpoint, or Databricks-side configurations that we should validate?
+
+Since the wildcard confirms that the overall integration flow is working, we would like to identify why the more restrictive organization-path condition is not being accepted.
+
+Your guidance will help us determine the appropriate and secure policy configuration and move forward with the remaining setup.
+
+Thanks,
