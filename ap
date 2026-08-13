@@ -1,3 +1,5 @@
+Assistance Required – S3 Access Failure with Full aws:VpceOrgPaths for Databricks Serverless
+
 Hi Team,
 
 We would like your assistance in investigating an **S3 access issue with Databricks Serverless compute using the `aws:VpceOrgPaths` condition** during our Integration environment testing.
