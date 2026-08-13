@@ -1,0 +1,48 @@
+Hi Team,
+
+We would like your assistance in investigating an **S3 access issue with Databricks Serverless compute using the `aws:VpceOrgPaths` condition** during our Integration environment testing.
+
+Based on our testing, we observed the following behavior:
+
+* Access to the S3 bucket **works successfully when we use the broader organization path with a wildcard**:
+  `o-g29axo4oyt/*`
+
+* Access **fails when we use the complete Databricks Serverless OrgPath** currently documented/provided for our environment:
+  `o-g29axo4oyt/r-gu8r/ou-gu8r-g4va1rkr/ou-gu8r-hvyilq7g/`
+
+* The same overall configuration/access pattern is working in our **SVC environment**, but we are seeing different behavior in the **Integration environment**.
+
+* No changes were required on the S3 module side to make the wildcard configuration work. Once the condition was changed from the full OrgPath to `o-g29axo4oyt/*`, the S3 access was successful.
+
+Our understanding from the Databricks documentation is that Serverless compute communicates with S3 through Databricks-managed VPC endpoints and that the S3 bucket policy can use the AWS `aws:VpceOrgPaths` condition key to restrict access.
+
+Since the broader organization wildcard works but the Databricks-provided full OrgPath does not, we would like to understand whether the **actual VPC endpoint used by our Integration Serverless compute is associated with a different AWS Organizations path than the one currently documented/provided**.
+
+Could you please help us validate the following?
+
+1. **What is the exact `aws:VpceOrgPaths` value presented by the Databricks Serverless S3 VPC endpoint for our Integration environment?**
+
+2. Why would `o-g29axo4oyt/*` successfully match the request while the complete documented OrgPath fails?
+
+3. Could the Integration workspace/serverless VPC endpoint currently belong to a **different OU/sub-OU path** than:
+   `o-g29axo4oyt/r-gu8r/ou-gu8r-g4va1rkr/ou-gu8r-hvyilq7g/`?
+
+4. Is there any difference in the **Databricks Serverless VPC/VPCE deployment or AWS Organizations placement between our SVC and Integration environments** that could explain this behavior?
+
+5. Are there any additional **Databricks, AWS Organizations, S3 bucket policy, VPC endpoint, or Network Connectivity Configuration (NCC)** settings that we should validate?
+
+We would prefer to use the **most restrictive supported OrgPath** rather than the broader `o-g29axo4oyt/*` wildcard. The wildcard is currently helping us confirm that the rest of the integration flow is functioning, but we would like to determine the root cause before finalizing the production policy.
+
+We will attach the following for reference:
+
+* S3 bucket policy configuration
+* Working wildcard configuration
+* Failing full OrgPath configuration
+* Databricks OrgPath screenshot/documentation
+* Integration test results
+* SVC vs. Integration configuration comparison
+
+Please let us know if you need the **workspace ID, AWS account ID, region, NCC ID, S3 bucket details, or any additional logs** from our side to trace the Serverless VPC endpoint being used.
+
+Thanks,
+Satish
