@@ -1,0 +1,11 @@
+git checkout main && \
+git pull origin main && \
+git checkout -b feature7-recovery && \
+echo "===== CURRENT BRANCH =====" && \
+git branch --show-current && \
+echo "===== FEATURE7 COMMIT =====" && \
+git show --stat --oneline 67111c0 && \
+echo "===== DIFFERENCE: FEATURE7 vs CURRENT MAIN =====" && \
+git diff --stat 67111c0..main && \
+echo "===== CHANGED FILES =====" && \
+git diff --name-status 67111c0..main
