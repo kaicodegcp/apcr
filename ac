@@ -1,0 +1,11 @@
+OWNER TYPE          VALUE TO PROVIDE
+-------------------------------------------------------
+User                username / email
+Group               group display name
+Service Principal   application_id (UUID)
+
+That string can identify any of these:
+
+User → username/email, e.g. "john.doe@company.com"
+Group → group display name, e.g. "Data Engineers"
+Service Principal → application_id, e.g. "12345678-abcd-1234-abcd-123456789012"
