@@ -1,0 +1,20 @@
+index=* sourcetype="aws:cloudtrail"
+eventSource="s3.amazonaws.com"
+requestParameters.bucketName="<BUCKET_NAME>"
+(
+    eventName="PutObject"
+    OR eventName="GetObject"
+    OR eventName="ListBucket"
+    OR eventName="GetBucketLocation"
+    OR eventName="HeadBucket"
+    OR eventName="DeleteObject"
+)
+| table _time
+        eventName
+        errorCode
+        errorMessage
+        userIdentity.arn
+        requestParameters.bucketName
+        requestParameters.key
+        sourceIPAddress
+| sort - _time
