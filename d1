@@ -1,0 +1,19 @@
+index=* earliest=-2h
+(
+    "QUERY_RESULT_WRITE_TO_CLOUD_STORE_PERMISSION_ERROR"
+    OR "AccessDenied"
+    OR "AccessDeniedException"
+    OR "403"
+    OR "s3:GetObject"
+    OR "s3:PutObject"
+    OR "s3:ListBucket"
+    OR "kms:Decrypt"
+    OR "kms:GenerateDataKey"
+    OR "AssumeRole"
+)
+| search (
+    "olympus-dev-wks-use1"
+    OR "databricks"
+)
+| table _time host source sourcetype awsRegion eventSource eventName errorCode errorMessage userIdentity.arn requestParameters.bucketName requestParameters.key
+| sort - _time
