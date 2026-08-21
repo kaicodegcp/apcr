@@ -1,0 +1,19 @@
+Databricks Account
+        |
+        |-- Workspace DEV
+        |-- Workspace INT
+        |-- Workspace UAT
+        |-- Workspace PROD
+        |
+        +------ Account-Level Audit Log Delivery
+                         |
+                         v
+                    AWS IAM Role
+                         |
+                         v
+                    S3 Audit Bucket
+                         |
+        +----------------+----------------+
+        |                |                |
+ workspaceId=123   workspaceId=456   workspaceId=0
+ DEV events         PROD events      Account events
